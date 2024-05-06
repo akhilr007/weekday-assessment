@@ -1,7 +1,12 @@
 import "./App.css";
+import JobList from "./components/JobList/JobList";
 
 function App() {
-  return <>Jobs</>;
+  return (
+    <>
+      <JobList />
+    </>
+  );
 }
 
 export default App;

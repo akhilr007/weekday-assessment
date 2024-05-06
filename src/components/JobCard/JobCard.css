@@ -1,0 +1,33 @@
+.job-card {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.company-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.company-logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+}
+
+.apply-button {
+  margin-top: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.job-card-grid-item {
+  padding: 8px;
+}
+
+@media (min-width: 960px) {
+  .job-card-grid-item {
+    max-width: 33.33%;
+  }
+}

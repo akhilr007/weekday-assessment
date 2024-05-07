@@ -15,6 +15,7 @@ function JobList() {
   const locationFilter = useSelector((state) => state.filters.location);
   const minExpFilter = useSelector((state) => state.filters.minExperience);
   const minBasePayFilter = useSelector((state) => state.filters.minBasePay);
+  const roleFilter = useSelector((state) => state.filters.role);
 
   const filteredJobs = jobs.filter((job) => {
     const companyNameMatches =
@@ -35,16 +36,22 @@ function JobList() {
       (job.minExp !== null && job.minExp >= parseInt(minExpFilter, 10));
 
     const minBasePayMatch =
-      "" ||
+      minBasePayFilter === "" ||
       (job.minJdSalary != null &&
         job.minJdSalary >= parseInt(minBasePayFilter, 10));
+
+    const roleMatch =
+      roleFilter === "" ||
+      (job.jobRole !== null &&
+        job.jobRole.toLowerCase().includes(roleFilter.toLowerCase()));
 
     return (
       companyNameMatches &&
       isMatchingRemote &&
       locationMatch &&
       minExpMatch &&
-      minBasePayMatch
+      minBasePayMatch &&
+      roleMatch
     );
   });
 

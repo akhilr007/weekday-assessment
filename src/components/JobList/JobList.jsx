@@ -16,6 +16,7 @@ function JobList() {
   const minExpFilter = useSelector((state) => state.filters.minExperience);
   const minBasePayFilter = useSelector((state) => state.filters.minBasePay);
   const roleFilter = useSelector((state) => state.filters.role);
+  const techStackFilter = useSelector((state) => state.filters.techStack);
 
   const filteredJobs = jobs.filter((job) => {
     const companyNameMatches =
@@ -45,13 +46,19 @@ function JobList() {
       (job.jobRole !== null &&
         job.jobRole.toLowerCase().includes(roleFilter.toLowerCase()));
 
+    const techStackMatch =
+      techStackFilter === "" ||
+      (job.jobRole !== null &&
+        job.jobRole.toLowerCase().includes(techStackFilter.toLowerCase()));
+
     return (
       companyNameMatches &&
       isMatchingRemote &&
       locationMatch &&
       minExpMatch &&
       minBasePayMatch &&
-      roleMatch
+      roleMatch &&
+      techStackMatch
     );
   });
 

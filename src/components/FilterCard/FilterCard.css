@@ -1,0 +1,11 @@
+.filterCard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filterItem {
+  flex: 1 0 auto;
+  min-width: 200px;
+}

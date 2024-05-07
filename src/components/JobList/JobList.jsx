@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 function JobList() {
   const { jobs, loading, loadMore } = useJobs();
-  console.log(jobs);
   useInfiniteScroll(loadMore);
 
   const companyNameFilter = useSelector((state) => state.filters.companyName);

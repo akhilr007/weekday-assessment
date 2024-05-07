@@ -22,13 +22,6 @@ function CompanyNameFilter() {
 
   return (
     <div>
-      {filters.companyName.length > 0 ? (
-        <div>
-          <label>Company Name</label>
-        </div>
-      ) : (
-        ""
-      )}
       <input
         className="companyNameFilter"
         placeholder="Enter company Name"

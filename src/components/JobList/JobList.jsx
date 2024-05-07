@@ -7,13 +7,25 @@ import { useSelector } from "react-redux";
 
 function JobList() {
   const { jobs, loading, loadMore } = useJobs();
+  console.log(jobs);
   useInfiniteScroll(loadMore);
 
   const companyNameFilter = useSelector((state) => state.filters.companyName);
-  const filteredJobs = jobs.filter(
-    (job) => job.companyName.toLowerCase() === companyNameFilter.toLowerCase()
-  );
-  console.log(filteredJobs);
+  const remoteFilter = useSelector((state) => state.filters.remote);
+
+  const filteredJobs = jobs.filter((job) => {
+    const companyNameMatches =
+      job.companyName.toLowerCase() === companyNameFilter.toLowerCase();
+
+    const isMatchingRemote =
+      remoteFilter === "remote"
+        ? job.location.toLowerCase() === "remote"
+        : remoteFilter === "onsite"
+        ? job.location.toLowerCase() !== "remote"
+        : true;
+
+    return companyNameMatches || isMatchingRemote;
+  });
 
   return (
     <>

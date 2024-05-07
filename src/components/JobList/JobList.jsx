@@ -12,19 +12,23 @@ function JobList() {
 
   const companyNameFilter = useSelector((state) => state.filters.companyName);
   const remoteFilter = useSelector((state) => state.filters.remote);
+  const locationFilter = useSelector((state) => state.filters.location);
 
   const filteredJobs = jobs.filter((job) => {
     const companyNameMatches =
+      companyNameFilter === "" ||
       job.companyName.toLowerCase() === companyNameFilter.toLowerCase();
 
     const isMatchingRemote =
-      remoteFilter === "remote"
-        ? job.location.toLowerCase() === "remote"
-        : remoteFilter === "onsite"
-        ? job.location.toLowerCase() !== "remote"
-        : true;
+      remoteFilter === "" ||
+      (remoteFilter === "remote" && job.location.toLowerCase() === "remote") ||
+      (remoteFilter === "onsite" && job.location.toLowerCase() !== "remote");
 
-    return companyNameMatches || isMatchingRemote;
+    const locationMatch =
+      locationFilter === "" ||
+      job.location.toLowerCase().includes(locationFilter.toLowerCase());
+
+    return companyNameMatches && isMatchingRemote && locationMatch;
   });
 
   return (

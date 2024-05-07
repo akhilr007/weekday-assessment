@@ -13,6 +13,7 @@ function JobList() {
   const companyNameFilter = useSelector((state) => state.filters.companyName);
   const remoteFilter = useSelector((state) => state.filters.remote);
   const locationFilter = useSelector((state) => state.filters.location);
+  const minExpFilter = useSelector((state) => state.filters.minExperience);
 
   const filteredJobs = jobs.filter((job) => {
     const companyNameMatches =
@@ -28,7 +29,13 @@ function JobList() {
       locationFilter === "" ||
       job.location.toLowerCase().includes(locationFilter.toLowerCase());
 
-    return companyNameMatches && isMatchingRemote && locationMatch;
+    const minExpMatch =
+      minExpFilter === "" ||
+      (job.minExp !== null && job.minExp >= parseInt(minExpFilter, 10));
+
+    return (
+      companyNameMatches && isMatchingRemote && locationMatch && minExpMatch
+    );
   });
 
   return (

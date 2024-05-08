@@ -16,7 +16,6 @@ const JobCard = ({
     jobDetailsFromCompany,
     jobRole,
     minExp,
-    maxExp,
     location,
     maxJdSalary,
     minJdSalary,
@@ -85,7 +84,7 @@ const JobCard = ({
               <strong>Minimum Experience</strong>
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              {minExp ? minExp : 0} - {maxExp ? maxExp : 0} years
+              {minExp ? minExp : 0} years
             </Typography>
           </Box>
           <Box mt={2} className="apply-button">

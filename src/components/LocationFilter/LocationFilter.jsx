@@ -22,13 +22,6 @@ function LocationFilter() {
 
   return (
     <div>
-      {filters.location.length > 0 ? (
-        <div>
-          <label>Location</label>
-        </div>
-      ) : (
-        ""
-      )}
       <input
         className="locationFilter"
         placeholder="Enter location"

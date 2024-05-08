@@ -26,7 +26,7 @@ const JobCard = ({
   const toggleShowMore = () => setShowMore(!showMore);
 
   return (
-    <Grid item xs={12} md={6} lg={4} className="job-card-grid-item">
+    <Grid item xs={12} md={6} lg={3} className="job-card-grid-item">
       <Card className="job-card">
         <CardContent>
           <Box className="company-info">

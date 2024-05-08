@@ -2,7 +2,7 @@ import { Box, Typography, Badge } from "@mui/material";
 
 function SearchIcon({ filteredJobs, jobs }) {
   return (
-    <Box display="flex" justifyContent="center">
+    <Box display="flex" justifyContent="center" sx={{ marginTop: "20px" }}>
       <Box position="relative">
         <Typography variant="h6" sx={{ fontWeight: "medium" }}>
           Search Jobs

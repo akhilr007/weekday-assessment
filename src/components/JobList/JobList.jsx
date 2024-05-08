@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import useJobs from "../../hooks/useJobs";
 import JobCard from "../JobCard/JobCard";
 import useInfiniteScroll from "../../hooks/useInfiniteScroll";
@@ -19,7 +19,7 @@ function JobList() {
       <SearchIcon filteredJobs={filteredJobs} jobs={jobs} />
       <FilterCard />
       <Grid container spacing={2}>
-        {loading && <p> Loading jobs</p>}
+        {loading && <CircularProgress />}
         {filteredJobs.length > 0 &&
           filteredJobs.map((job, index) => (
             <JobCard job={job} key={`${job.jdUid}-${index}`} />

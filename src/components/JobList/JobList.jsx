@@ -6,13 +6,21 @@ import FilterCard from "../FilterCard/FilterCard";
 import { useSelector } from "react-redux";
 import useMemoizedFilter from "../../hooks/useMemoizedFilter";
 import SearchIcon from "../SearchIcon/SearchIcon";
+import { useEffect, useState } from "react";
 
 function JobList() {
   const { jobs, loading, loadMore } = useJobs();
   useInfiniteScroll(loadMore);
 
   const filters = useSelector((state) => state.filters);
-  const filteredJobs = useMemoizedFilter(jobs, filters);
+
+  const [filteredJobs, setFilteredJobs] = useState([]);
+
+  const newFilteredJobs = useMemoizedFilter(jobs, filters, filteredJobs);
+
+  useEffect(() => {
+    setFilteredJobs(newFilteredJobs);
+  }, [newFilteredJobs]);
 
   return (
     <>

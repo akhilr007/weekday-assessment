@@ -13,7 +13,6 @@ function JobList() {
   useInfiniteScroll(loadMore);
 
   const filters = useSelector((state) => state.filters);
-  // const filteredJobs = useMemoizedFilter(jobs, filters);
 
   const [filteredJobs, setFilteredJobs] = useState([]);
 

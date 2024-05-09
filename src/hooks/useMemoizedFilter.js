@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-function useMemoizedFilter(jobs, filters) {
+function useMemoizedFilter(jobs, filters, prevFilteredJobs) {
   const companyNameFilter = filters.companyName;
   const remoteFilter = filters.remote;
   const locationFilter = filters.location;
@@ -24,7 +24,50 @@ function useMemoizedFilter(jobs, filters) {
       return jobs; // No filters applied, return all jobs
     }
 
-    return jobs.filter((job) => {
+    if (!prevFilteredJobs || prevFilteredJobs.length === 0) {
+      return jobs.filter((job) => {
+        const companyNameMatch =
+          companyNameFilter === "" ||
+          job.companyName.toLowerCase() === companyNameFilter.toLowerCase();
+        const isMatchingRemote =
+          remoteFilter === "" ||
+          (remoteFilter === "remote" &&
+            job.location.toLowerCase() === "remote") ||
+          (remoteFilter === "onsite" &&
+            job.location.toLowerCase() !== "remote");
+        const locationMatch =
+          locationFilter === "" ||
+          job.location.toLowerCase().includes(locationFilter.toLowerCase());
+        const minExpMatch =
+          minExperienceFilter === "" ||
+          (job.minExp !== null &&
+            job.minExp >= parseInt(minExperienceFilter, 10));
+        const minBasePayMatch =
+          minBasePayFilter === "" ||
+          (job.minJdSalary != null &&
+            job.minJdSalary >= parseInt(minBasePayFilter, 10));
+        const roleMatch =
+          roleFilter === "" ||
+          (job.jobRole !== null &&
+            job.jobRole.toLowerCase().includes(roleFilter.toLowerCase()));
+        const techStackMatch =
+          techStackFilter === "" ||
+          (job.jobRole !== null &&
+            job.jobRole.toLowerCase().includes(techStackFilter.toLowerCase()));
+
+        return (
+          companyNameMatch &&
+          isMatchingRemote &&
+          locationMatch &&
+          minExpMatch &&
+          minBasePayMatch &&
+          roleMatch &&
+          techStackMatch
+        );
+      });
+    }
+
+    return prevFilteredJobs.filter((job) => {
       const companyNameMatch =
         companyNameFilter === "" ||
         job.companyName.toLowerCase() === companyNameFilter.toLowerCase();
@@ -72,6 +115,7 @@ function useMemoizedFilter(jobs, filters) {
     minBasePayFilter,
     roleFilter,
     techStackFilter,
+    prevFilteredJobs,
   ]);
 
   return filteredJobs;
